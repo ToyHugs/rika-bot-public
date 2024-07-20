@@ -9,11 +9,10 @@ mkdir -p $DEPLOY_DIR
 # Aller au répertoire de déploiement
 cd $DEPLOY_DIR
 
-# Si le répertoire n'est pas un dépôt Git, initialiser un dépôt
-if [ ! -d ".git" ]; then
-  git init
-  git remote add origin git@github.com:ToyHugs/rika-bot-public.git
-fi
+# Initialiser un dépôt Git - si le répertoire n'est pas déjà un dépôt Git
+git init
+git remote set-url origin git@github.com:ToyHugs/rika-bot-public.git
+
 
 # Mettre à jour le dépôt et installer les dépendances
 git fetch origin
