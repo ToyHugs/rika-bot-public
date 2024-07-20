@@ -6,6 +6,9 @@ DEPLOY_DIR="./github_actions/rikabot"
 # Créer le répertoire s'il n'existe pas
 mkdir -p $DEPLOY_DIR
 
+# Copie le fichier .env
+cp .env $DEPLOY_DIR
+
 # Aller au répertoire de déploiement
 cd $DEPLOY_DIR
 

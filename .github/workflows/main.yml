@@ -3,7 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main  # Changez ceci à la branche de votre choix
+      - main 
 
 jobs:
   deploy:
@@ -20,6 +20,17 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H vps.toyhugs.fr >> ~/.ssh/known_hosts
 
+      - name: Create .env file
+        run: |
+          echo "VPN_USERNAME=${{ secrets.VPN_USERNAME }}" > .env
+          echo "VPN_PASSWORD=${{ secrets.VPN_PASSWORD }}" >> .env
+          echo "DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}" >> .env
+          echo "LANGCHAIN_TRACING_V2=${{ secrets.LANGCHAIN_TRACING_V2 }}" >> .env
+          echo "LANGCHAIN_API_KEY=${{ secrets.LANGCHAIN_API_KEY }}" >> .env
+          echo "LANGCHAIN_PROJECT=${{ secrets.LANGCHAIN_PROJECT }}" >> .env
+          echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> .env
+
       - name: Deploy to VPS
         run: |
+          scp -i ~/.ssh/id_rsa .env debian@vps.toyhugs.fr:./.env
           ssh -i ~/.ssh/id_rsa debian@vps.toyhugs.fr 'bash -s' < ./deploy.sh
