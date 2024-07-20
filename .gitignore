@@ -1,0 +1,8 @@
+# Gitignore file
+
+# Ignore general files
+.env
+
+# Ignonre python cache files
+__pycache__/
+venv/

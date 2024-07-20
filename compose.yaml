@@ -1,0 +1,33 @@
+# Docker Compose With VPN Service (ProtonVPN)
+services:
+  vpn: # VPN Client
+    env_file:
+      - .env
+    build:
+      context: ./vpn
+      dockerfile: DockerFile
+      args:
+        VPN_USERNAME_ARG: ${VPN_USERNAME}
+        VPN_PASSWORD_ARG: ${VPN_PASSWORD}
+    container_name: vpn-container
+    cap_add:
+      - NET_ADMIN # Add the NET_ADMIN capability to the container
+    devices:
+      - /dev/net/tun # Add the TUN device to the container
+    restart: "no"
+    network_mode: "bridge"
+
+  python-bot: # Python Bot
+    build:
+      context: ./python-bot
+      dockerfile: DockerFile.dev
+    container_name: python-bot
+    restart: always
+    volumes:
+      - ./python-bot:/app
+    env_file:
+      - .env
+    network_mode: "service:vpn"
+    depends_on:
+      - vpn
+

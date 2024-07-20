@@ -1,0 +1,4 @@
+py-cord # Library for Discord API
+langchain # Library for Langchain API
+langchain-google-genai # Library for Google Generative AI API
+langchain-community # Library for Langchain Community API

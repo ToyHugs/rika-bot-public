@@ -1,0 +1,17 @@
+FROM debian:12.6-slim
+ARG VPN_USERNAME_ARG
+ARG VPN_PASSWORD_ARG
+
+WORKDIR /vpn
+
+RUN apt-get update && apt-get install -y openvpn openresolv wget iproute2 iptables
+RUN wget "https://raw.githubusercontent.com/ProtonVPN/scripts/master/update-resolv-conf.sh" -O "/etc/openvpn/update-resolv-conf"
+RUN chmod +x "/etc/openvpn/update-resolv-conf"
+RUN touch /vpn/vpnauth.conf
+RUN echo "${VPN_USERNAME_ARG}" > /vpn/vpnauth.conf
+RUN echo "${VPN_PASSWORD_ARG}" >> /vpn/vpnauth.conf
+
+COPY start.sh /vpn/start.sh
+COPY vpnconfig.ovpn /vpn/vpnconfig.ovpn
+
+CMD ["sh", "start.sh"]

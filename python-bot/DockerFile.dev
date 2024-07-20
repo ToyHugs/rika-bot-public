@@ -1,0 +1,18 @@
+# Docker File for Development in Python
+
+# Use an official Python runtime as a parent image
+FROM python:3.11-bookworm as python-bot
+
+# Don't write BYTECODE files
+ENV PYTHONDONTWRITEBYTECODE 1
+
+# Install dependencies
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy the current directory contents into the container at /app
+COPY . .
+
+# Run the application
+CMD ["sh", "start-docker.sh"]
