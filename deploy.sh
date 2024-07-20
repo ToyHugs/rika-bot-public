@@ -26,7 +26,7 @@ git reset --hard origin/main
 source env-export.sh
 
 # Force le redémarrage des conteneurs
-docker-compose -f docker-compose.yml down
+docker-compose -f docker-compose.yaml down
 
 # Redémarre les conteneurs
-docker-compose -f docker-compose.yml up -d --build
+docker-compose -f docker-compose.yaml up -d --build
