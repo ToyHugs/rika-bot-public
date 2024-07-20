@@ -12,7 +12,7 @@ cd $DEPLOY_DIR
 # Si le répertoire n'est pas un dépôt Git, initialiser un dépôt
 if [ ! -d ".git" ]; then
   git init
-  git remote add origin git@github.com:your_username/your_repository.git
+  git remote add origin git@github.com:ToyHugs/rika-bot-public.git
 fi
 
 # Mettre à jour le dépôt et installer les dépendances
