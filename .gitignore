@@ -6,3 +6,6 @@
 # Ignonre python cache files
 __pycache__/
 venv/
+
+# Ignore specific files
+compose.windows.yaml
