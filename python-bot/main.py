@@ -39,7 +39,7 @@ async def crie(ctx: discord.ApplicationContext):
 @bot.slash_command(name="booba", description="Say hello to the bot")
 async def booba(ctx: discord.ApplicationContext):
     print("Booba")
-    await ctx.respond("Hello!")
+    await ctx.respond("Hello!!!")
 
 
 # Retrieve the id of the guilds where the commands is used
